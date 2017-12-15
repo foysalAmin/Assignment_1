@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>Developer Addition</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--[if IE]><link rel="stylesheet" type="text/css" media="screen, projection" 
+      href="http://www.blueprintcss.org/blueprint/ie.css"><![endif]-->
+    <script type="text/javascript"
+      src="//code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="../js/developer.js"></script>
+    <style type="text/css">
+      #loginContent { width: 350px; margin: 100px auto; }
+      button[type] { margin: 0.5em 0; }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Assignment</a>
+    </div>
+    <ul class="nav navbar-nav">
+    <li><a href="../index.html">Home</a></li>
+      <li><a href="../developer/developer_login.html">Developer</a></li>
+      <li><a href="../admin/admin_login.html">Admin</a></li>
+    </ul>
+   <ul class="nav navbar-nav navbar-right">
+      <li><a href="../customer/customer_SignUp.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+
+ <div class="container">
+    <h2>Developer Registration</h2>
+    <div id="developerRegisterResult">
+    </div>
+        <form id="developerRegister" name="developerRegister" action="" method="post">
+          <div class="form-group">
+          <label for="fullname">Username:</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter username" name="username" required>
+       </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  
+  </form>
+   </div>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Developer Deatils</title>
+    <!--[if IE]><link rel="stylesheet" type="text/css" media="screen, projection" 
+      href="http://www.blueprintcss.org/blueprint/ie.css"><![endif]-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+      src="//code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="../js/developer.js"></script>
+    <style type="text/css">
+      #loginContent { width: 350px; margin: 100px auto; }
+      button[type] { margin: 0.5em 0; }
+    </style>
+  </head>
+  <body>
+    <h3>Developer Details</h3>
+    <h4>Developer ID : <span id='username'></span></h4>
+ <h4>Developed Games :</h4>
+    <table class="table">
+     <thead id="head">
+     </thead>
+     <tbody id="userdata">
+
+     </tbody>
+   </table>     
+  </body>
+</html>
+<script>
+var developerid=getID('id');
+var xmlhttp = new XMLHttpRequest();
+var url = "http://people.aero.und.edu/~mamin/cgi-bin/developerDetails.cgi?id="+getID('id');
+console.log()
+xmlhttp.onreadystatechange = function()
+{
+  if ( this.readyState == 4 && this.status == 200)
+  {
+   // console.log("bal");
+    getAllGames( this.responseText );      
+  }
+}
+xmlhttp.open ( "GET", url, true);
+xmlhttp.send();
+
+function getAllGames( response )
+{
+  var arr = JSON.parse( response )
+  var i;
+  var header="<tr><th>ASIN</th><th>TITLE</th><th>PRICE</th></tr>" 
+  var out = "";
+  for(i = 0; i < arr.length; i++)
+   {
+       out +="<tr><td>"+arr[i].ASIN+"</td><td><a href='http://people.aero.und.edu/~mamin/Assignment/admin/game_details.html?asin="+arr[i].ASIN+"'>"+arr[i].TITLE+"</a></td><td> "+arr[i].PRICE+"</td></tr>"  
+   }
+
+  document.getElementById("username").innerHTML = developerid;
+  document.getElementById("head").innerHTML = header;
+  document.getElementById("userdata").innerHTML = out;
+}
+
+function getID(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  } 
+  alert('Query Variable ' + variable + ' not found');
+}
+
+</script>

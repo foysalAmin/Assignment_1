@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <title>Developer Addition</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--[if IE]><link rel="stylesheet" type="text/css" media="screen, projection" 
+      href="http://www.blueprintcss.org/blueprint/ie.css"><![endif]-->
+    <script type="text/javascript"
+      src="//code.jquery.com/jquery-1.4.4.min.js"></script>
+<style type="text/css">
+    object { width: 600px; height: 500px;}
+    </style>
+
+
+  </head>
+  <body>
+
+  <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Game Store</a>
+    </div>
+    <ul class="nav navbar-nav">
+    <li><a href="../index.html">Home</a></li>
+      <li><a href="../developer/developer_login.html">Developer</a></li>
+      <li><a href="../admin/admin_login.html">Admin</a></li>
+     </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+  <div class="row">
+  <div class="col-md-3">
+   <input type= "button" value= "Show All Data" class="btn btn-default btn-block"  onclick= "populateData(event)" />
+   <input type= "button" value= "Enter Games" class="btn btn-default btn-block" onclick= "populateData(event)" />  
+   <input type= "button" value= "Delete Developers" class="btn btn-default btn-block" onclick="populateData(event)"   />
+   <input type= "button" value= "Game Price" class="btn btn-default btn-block" onclick="populateData(event)"   />
+   <input type="button" value="Log Out" class="btn btn-default btn-block"  onclick="window.location.href='../index.html'"   />
+    
+  </div>
+    <div class="col-md-9">
+      <div id="data" class= "" align="center" >
+	 </div> 
+   </div>
+  </div>
+  
+  </div>
+			
+
+  </body>
+</html>
+
+<script>
+var targetDiv = document.getElementById('data');
+
+    targetDiv.innerHTML = '<object type="text/html" data="list_data.html" ></object>';
+
+    var htmlContent = ' ';
+
+    function populateData(event){
+      switch(event.target.value){
+	    
+		 case 'Show All Data':{
+         htmlContent = '<object type="text/html" data="list_data.html" ></object>';
+          break;
+        }
+	    
+        case 'Enter Games':{
+         htmlContent = '<object type="text/html" data="create_games.html" ></object>';
+          break;
+        }
+	      case 'Game Price':{
+         htmlContent = '<object type="text/html" data="game_price.html" ></object>';
+          break;
+        }
+
+		
+        case 'Delete Developers':{
+          htmlContent = '<object type="text/html" data="remove_developer.html" ></object>';
+         break;
+        }
+      }
+      targetDiv.innerHTML = htmlContent;
+    }
+
+</script>

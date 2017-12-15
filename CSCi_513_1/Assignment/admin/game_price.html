@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Developer Addition</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/game_price.js"></script>
+  <script type="text/javascript"
+  src="//code.jquery.com/jquery-1.4.4.min.js"></script>
+  <style type="text/css">
+  #loginContent { width: 350px; margin: 100px auto; }
+  button[type] { margin: 0.5em 0; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+      <div id="gameResult" style="display:normal;">
+      </div>
+    <form id ="priceUpdateForm">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ASIN</th>
+            <th>TITLE</th>
+            <th>PRICE</th>
+          </tr>
+        </thead>
+        <tbody id="gamedata">
+
+        </tbody>
+      </table>
+     <input type="submit" class="btn btn-primary" name="action" value="Submit" />
+    </form>
+
+
+  </div>
+</body>
+</html>
+
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "http://people.aero.und.edu/~mamin/cgi-bin/getAllGames.cgi";
+xmlhttp.onreadystatechange = function()
+{
+  if ( this.readyState == 4 && this.status == 200)
+  {
+    getAllGames( this.responseText );      
+  }
+}
+xmlhttp.open ( "GET", url, true);
+xmlhttp.send();
+
+function getAllGames( response )
+{
+  var arr = JSON.parse( response )
+  var i;
+  var out = "";
+  if( arr.length == 0)
+  {
+    out += "<p>No Games to show </p>";
+  }
+  else
+  {
+    for(i = 0; i < arr.length; i++)
+    {
+      out +="<tr><td>"+arr[i].ASIN+"</td><td>"+arr[i].TITLE+"</td><td>  <input type='number' class='form-control' id='"+arr[i].ASIN+"' name='price' value='"+arr[i].PRICE+"'></td></tr>" 
+    }
+  }
+  document.getElementById("gamedata").innerHTML = out;
+}
+</script>

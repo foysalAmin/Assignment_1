@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Customer Login</title>
+    <!--[if IE]><link rel="stylesheet" type="text/css" media="screen, projection" 
+      href="http://www.blueprintcss.org/blueprint/ie.css"><![endif]-->
+    <script type="text/javascript"
+      src="//code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="../js/developer.js"></script>
+    <style type="text/css">
+      #loginContent { width: 350px; margin: 100px auto; }
+      button[type] { margin: 0.5em 0; }
+    </style>
+  </head>
+<body>
+    <h3  style="color:orange;">GAME Details</h3> 
+    <h4>GAME ASIN : <span id='asin'></span></h4>
+	<h4>GAME Title : <span id='title'></span></h4>
+	<h4>GAME Price : <span id='price'></span></h4>
+    <h4>DEVELOPER LIST : <span id='username'></span></h4>
+    <table class="table">
+     <thead id="head">
+     </thead>
+     <tbody id="userdata">
+
+     </tbody>
+   </table>   
+    <a id="add_developer" href="#" >Add More Developer</a>  
+  </body>
+</html>
+<script>
+var asin=getQueryVariable('asin');
+var xmlhttp = new XMLHttpRequest();
+var url = "http://people.aero.und.edu/~mamin/cgi-bin/gameDetails.cgi?asin="+getQueryVariable('asin');
+xmlhttp.onreadystatechange = function()
+{
+  if ( this.readyState == 4 && this.status == 200)
+  {
+   
+    getAllGames( this.responseText );      
+  }
+}
+xmlhttp.open ( "GET", url, true);
+xmlhttp.send();
+
+function getAllGames( response )
+{
+	var arr = JSON.parse( response )
+  
+	if(arr.hasOwnProperty("Title"))
+	{
+		document.getElementById("title").innerHTML = arr.Title;
+	}
+	if(arr.hasOwnProperty("Price"))
+	{
+		document.getElementById("price").innerHTML = arr.Price
+	}
+	var i;
+	var header="<tr><th>ID</th><th>NAME</th></tr>" 
+	var out = "";
+	var array = arr.Devs;
+	if( array.length == 0)
+	{
+		out += " With out a developer"
+	} else { 
+
+   for(i = 0; i < array.length; i++)
+   {
+       out +="<tr><td>"+array[i].ID+"</td><td><a href='http://people.aero.und.edu/~mamin/Assignment/admin/developer_details.html?id="+array[i].ID+"'>"+array[i].DEVELOPER+"</a></td></tr>"  
+   }
+} 
+  document.getElementById("asin").innerHTML = asin;
+  document.getElementById("head").innerHTML = header;
+  document.getElementById("userdata").innerHTML = out;
+  
+  document.getElementById("add_developer").href = "create_games.html?asin="+asin+"&Price="+ arr.Price +"&Title="+arr.Title+"";
+}
+
+function getQueryVariable(variable) {
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  } 
+  alert('Query Variable ' + variable + ' not found');
+}
+
+</script>
